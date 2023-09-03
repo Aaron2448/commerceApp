@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  myapp-mysql:
+    build: mysql/
+    container_name: myapp-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=HelloWorld!
+      - MYSQL_DATABASE=flexdronedb2.0
+      - MYSQL_PASSWORD=HelloWorld!
+    ports:
+      - "3308:3306"
+
+  frontend:
+    container_name: ecommerce-frontend
+    restart: always
+    build: frontend/
+    depends_on:
+      - myapp-mysql
+    ports:
+      - "3001:3000"
+
+  ecommerce-system:
+    container_name: ecommerce-warehouse
+    restart: always
+    build: backend/
+    depends_on:
+       - myapp-mysql
+    ports:
+      - "8081:8080"
+    environment:
+      - DATABASE_HOST=myapp-mysql
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=HelloWorld!
+      - DATABASE_NAME=flexdronedb2.0
+      - DATABASE_PORT=3308

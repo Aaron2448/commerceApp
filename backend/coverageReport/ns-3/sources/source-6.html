@@ -1,0 +1,150 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ProductSupplierController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fdmgroup.flexdronepodq42022.Controller</a>
+</div>
+
+<h1>Coverage Summary for Class: ProductSupplierController (com.fdmgroup.flexdronepodq42022.Controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ProductSupplierController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fdmgroup.flexdronepodq42022.Controller;
+&nbsp;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Model.ProductSupplier;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Repository.ProductSupplierRepository;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;@CrossOrigin(origins = &quot;*&quot;, maxAge = 3600)
+&nbsp;@RestController
+&nbsp;@RequestMapping(&quot;/api/v1/productSupplier&quot;)
+&nbsp;public class ProductSupplierController {
+&nbsp;    private final ProductSupplierRepository productSupplierRepository;
+&nbsp;
+&nbsp;    @Autowired
+<b class="fc">&nbsp;    public ProductSupplierController(ProductSupplierRepository productSupplierRepository) {</b>
+<b class="fc">&nbsp;        this.productSupplierRepository = productSupplierRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/getAll&quot;)
+&nbsp;    public List&lt;ProductSupplier&gt; getAllProductSuppliers() {
+<b class="fc">&nbsp;        return productSupplierRepository.findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @PostMapping(&quot;/create&quot;)
+&nbsp;    public ProductSupplier createProductSupplier(@RequestBody ProductSupplier productSupplier) {
+<b class="fc">&nbsp;        return productSupplierRepository.save(productSupplier);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/{id}&quot;)
+&nbsp;    public Optional&lt;ProductSupplier&gt; getProductSupplierById(@PathVariable Long id) {
+<b class="fc">&nbsp;        return productSupplierRepository.findById(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @PutMapping(&quot;/update/{id}&quot;)
+&nbsp;    public ProductSupplier updateProductSupplier(@PathVariable Long id, @RequestBody ProductSupplier productSupplier) {
+<b class="fc">&nbsp;        productSupplier.setId(id);</b>
+<b class="fc">&nbsp;        return productSupplierRepository.save(productSupplier);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @DeleteMapping(&quot;/delete/{id}&quot;)
+&nbsp;    public void deleteProductSupplier(@PathVariable Long id) {
+<b class="fc">&nbsp;        productSupplierRepository.deleteById(id);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-17 13:32</div>
+</div>
+</body>
+</html>

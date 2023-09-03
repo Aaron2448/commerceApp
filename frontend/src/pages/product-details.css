@@ -1,0 +1,9 @@
+body {
+    background-color: #eee;
+}
+
+@media (max-width: 1000px) {
+    .border-sm-start-none {
+        border-left: none !important;
+    }
+}

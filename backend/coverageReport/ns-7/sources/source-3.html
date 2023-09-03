@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Product</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fdmgroup.flexdronepodq42022.Model</a>
+</div>
+
+<h1>Coverage Summary for Class: Product (com.fdmgroup.flexdronepodq42022.Model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Product</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (33/33)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fdmgroup.flexdronepodq42022.Model;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.AllArgsConstructor;
+&nbsp;import lombok.Getter;
+&nbsp;import lombok.NoArgsConstructor;
+&nbsp;import lombok.Setter;
+&nbsp;
+<b class="fc">&nbsp;@Setter</b>
+&nbsp;@Getter
+<b class="fc">&nbsp;@NoArgsConstructor</b>
+<b class="fc">&nbsp;@AllArgsConstructor</b>
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;products&quot;)
+&nbsp;public class Product {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<b class="fc">&nbsp;    private long id;</b>
+&nbsp;
+&nbsp;    @Column(nullable = false, unique = true)
+<b class="fc">&nbsp;    private String sku;</b>
+&nbsp;
+&nbsp;    @Column
+<b class="fc">&nbsp;    private String description;</b>
+&nbsp;
+&nbsp;    @Column
+<b class="fc">&nbsp;    private float retailPrice;</b>
+&nbsp;
+&nbsp;    @Column
+<b class="fc">&nbsp;    public String category;</b>
+&nbsp;
+&nbsp;    @Column
+<b class="fc">&nbsp;    private String name;</b>
+&nbsp;
+&nbsp;    @Column
+<b class="fc">&nbsp;    private long externalStock;</b>
+&nbsp;
+&nbsp;    @Column
+<b class="fc">&nbsp;    private long internalStock;</b>
+&nbsp;
+&nbsp;    @Column
+<b class="fc">&nbsp;    private long minStockLevel;</b>
+&nbsp;
+&nbsp;    @Column
+<b class="fc">&nbsp;    private boolean isPart;</b>
+&nbsp;
+&nbsp;    @Column
+<b class="fc">&nbsp;    private String externalNote;</b>
+&nbsp;
+&nbsp;    @Column
+<b class="fc">&nbsp;    private String internalNote;</b>
+&nbsp;
+<b class="fc">&nbsp;    @Column</b>
+<b class="fc">&nbsp;    private String imageUrl = &quot;dronesAreUs.com.au/orangeDrone.jpg&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;    private int quantityInCart = 1;</b>
+&nbsp;
+&nbsp;    public Product(String sku, String description, float retailPrice, String category, String name, long externalStock,
+&nbsp;                   long internalStock, long minStockLevel, boolean isPart, String externalNote, String internalNote, String imageUrl, int quantityInCart) {
+&nbsp;
+<b class="fc">&nbsp;        super();</b>
+<b class="fc">&nbsp;        this.sku = sku;</b>
+<b class="fc">&nbsp;        this.description = description;</b>
+<b class="fc">&nbsp;        this.retailPrice = retailPrice;</b>
+<b class="fc">&nbsp;        this.category = category;</b>
+<b class="fc">&nbsp;        this.name = name;</b>
+<b class="fc">&nbsp;        this.externalStock = externalStock;</b>
+<b class="fc">&nbsp;        this.internalStock = internalStock;</b>
+<b class="fc">&nbsp;        this.minStockLevel = minStockLevel;</b>
+<b class="fc">&nbsp;        this.isPart = isPart;</b>
+<b class="fc">&nbsp;        this.externalNote = externalNote;</b>
+<b class="fc">&nbsp;        this.internalNote = internalNote;</b>
+<b class="fc">&nbsp;        this.imageUrl = imageUrl;</b>
+<b class="fc">&nbsp;        this.quantityInCart = quantityInCart;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toSummaryString() {
+<b class="fc">&nbsp;        return &quot;Product [retailPrice = &quot; + retailPrice + &quot;, name = &quot; + name + &quot;, quantity = &quot; + quantityInCart + &quot;]&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-17 13:32</div>
+</div>
+</body>
+</html>

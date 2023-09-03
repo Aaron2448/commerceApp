@@ -1,0 +1,267 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > DataLoader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fdmgroup.flexdronepodq42022.Data</a>
+</div>
+
+<h1>Coverage Summary for Class: DataLoader (com.fdmgroup.flexdronepodq42022.Data)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DataLoader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fdmgroup.flexdronepodq42022.Data;
+&nbsp;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Controller.EnquiryController;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Controller.OrderController;
+&nbsp;import com.fdmgroup.flexdronepodq42022.DTO.RegisterDto;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Model.Enquiry;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Model.OrderObj;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Model.Product;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Model.ProductSupplier;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Model.Role;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Model.Supplier;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Repository.*;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Service.AuthService;
+&nbsp;import jakarta.transaction.Transactional;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.boot.ApplicationArguments;
+&nbsp;import org.springframework.boot.ApplicationRunner;
+&nbsp;import org.springframework.security.crypto.password.PasswordEncoder;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;
+&nbsp;@Component
+&nbsp;public class DataLoader implements ApplicationRunner {
+&nbsp;
+&nbsp;    private final RoleRepository roleRepository;
+&nbsp;    private final ProductRepository productRepository;
+&nbsp;    private final SupplierRepository supplierRepository;
+&nbsp;    private final ProductSupplierRepository productSupplierRepository;
+&nbsp;    private final EnquiryController enquiryController;
+&nbsp;    private final OrderController orderController;
+&nbsp;    private final AuthService authService;
+&nbsp;    private final UserRepository userRepository;
+&nbsp;    PasswordEncoder passwordEncoder;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    public DataLoader(RoleRepository roleRepository, ProductRepository productRepository, SupplierRepository supplierRepository,
+<b class="nc">&nbsp;                      ProductSupplierRepository productSupplierRepository, EnquiryController enquiryController, PasswordEncoder passwordEncoder, OrderController orderController, AuthService authService, UserRepository userRepository) {</b>
+&nbsp;
+<b class="nc">&nbsp;        this.roleRepository = roleRepository;</b>
+<b class="nc">&nbsp;        this.productRepository = productRepository;</b>
+<b class="nc">&nbsp;        this.supplierRepository = supplierRepository;</b>
+<b class="nc">&nbsp;        this.productSupplierRepository = productSupplierRepository;</b>
+<b class="nc">&nbsp;        this.enquiryController = enquiryController;</b>
+<b class="nc">&nbsp;        this.passwordEncoder = passwordEncoder;</b>
+<b class="nc">&nbsp;        this.orderController = orderController;</b>
+<b class="nc">&nbsp;        this.authService = authService;</b>
+<b class="nc">&nbsp;        this.userRepository = userRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    @Transactional
+&nbsp;    public void run(ApplicationArguments args) throws Exception {
+&nbsp;        // Role Dummy Data
+<b class="nc">&nbsp;        Role roleAdmin = new Role(&quot;ROLE_ADMIN&quot;);</b>
+<b class="nc">&nbsp;        Role roleUser = new Role(&quot;ROLE_USER&quot;);</b>
+<b class="nc">&nbsp;        Role savedAdminRole = roleRepository.save(roleAdmin);</b>
+<b class="nc">&nbsp;        Role savedUserRole = roleRepository.save(roleUser);</b>
+&nbsp;
+&nbsp;
+&nbsp;        // Admin Dummy Data
+<b class="nc">&nbsp;        RegisterDto adminUser = new RegisterDto();</b>
+<b class="nc">&nbsp;        adminUser.setName(&quot;Sarabjeet Singh&quot;);</b>
+<b class="nc">&nbsp;        adminUser.setUsername(&quot;admin&quot;);</b>
+<b class="nc">&nbsp;        adminUser.setEmail(&quot;admin@email.com&quot;);</b>
+<b class="nc">&nbsp;        adminUser.setPassword(&quot;admin&quot;);</b>
+<b class="nc">&nbsp;        authService.registerAdmin(adminUser);</b>
+&nbsp;
+&nbsp;        // User Dummy Data
+<b class="nc">&nbsp;        RegisterDto normalUser = new RegisterDto();</b>
+<b class="nc">&nbsp;        normalUser.setName(&quot;John Doe&quot;);</b>
+<b class="nc">&nbsp;        normalUser.setUsername(&quot;johnsmith&quot;);</b>
+<b class="nc">&nbsp;        normalUser.setEmail(&quot;john@email.com&quot;);</b>
+<b class="nc">&nbsp;        normalUser.setPassword(&quot;john1&quot;);</b>
+<b class="nc">&nbsp;        authService.register(normalUser);</b>
+&nbsp;
+&nbsp;   
+&nbsp;
+&nbsp;        /*
+&nbsp;
+&nbsp;        // Create order object
+&nbsp;        OrderObj orderObj = new OrderObj();
+&nbsp;        // Create product obj to add to order object
+&nbsp;        Long longStock2 = Long.valueOf(111);
+&nbsp;	    float retailFloat2 = 120;
+&nbsp;	    Product prod1 = new Product(&quot;234454010&quot;, &quot;propeller&quot;, retailFloat2, &quot;propeller&quot;, &quot;18mm blade propleler&quot;, longStock2+=100, longStock2+=123, longStock2, true, &quot;notesTest&quot;, &quot;notesTest&quot;, &quot;propeller.jpg&quot;, 1);
+&nbsp;	    Product prod2 = new Product(&quot;374854015&quot;, &quot;collection flexdrone white&quot;, retailFloat2+=14, &quot;collection&quot;, &quot;Flexdrone flying kit matte white&quot;, longStock2+=11, longStock2+=210, longStock2+=112, true, &quot;notesTest&quot;, &quot;notesTest&quot;, &quot;droneWhite.jpg&quot;, 1);
+&nbsp;	    // Add products to Order object
+&nbsp;	    List&lt;Product&gt; list = new ArrayList&lt;Product&gt;();
+&nbsp;        list.add(prod1);
+&nbsp;	    list.add(prod2);
+&nbsp;        // fill out order obj	       
+&nbsp;	    orderObj.setCustomer_id(1);
+&nbsp;        orderObj.setAddress(&quot;AscotVale VIC AUS&quot;);
+&nbsp;	    orderObj.setEmail(&quot;aaron.marinelli@gmail.com&quot;);
+&nbsp;	    orderObj.setPayment_method(&quot;Paypal&quot;);
+&nbsp;        // Call the createOrder function with an order object and list of products
+&nbsp;	    orderController.createOrderObject(orderObj, list);
+&nbsp;
+&nbsp;	    // 
+&nbsp;
+&nbsp;        // Enquiries Dummy Data
+&nbsp;
+&nbsp;        EnquiryObj enquiry1 = new EnquiryObj();
+&nbsp;        enquiry1.setName(&quot;Aaron&quot;);
+&nbsp;        enquiry1.setDescription(&quot;Hi: I was wondering when you will have stock of the 1080p HD cameras please&quot;);
+&nbsp;        enquiry1.setEmail(&quot;marinelli.aaron@gmail.com&quot;);
+&nbsp;        enquiry1.setEnquiryType(&quot;General Enquiry&quot;);
+&nbsp;        enquiryController.createEnquiry(enquiry1);
+&nbsp;       
+&nbsp;        EnquiryObj enquiry2 = new EnquiryObj();
+&nbsp;        enquiry2.setName(&quot;Aaron&quot;);
+&nbsp;        enquiry2.setDescription(&quot;Hi: Can I please ask how my order is tracking, as it has been nearly two weeks since placing the order, thank you&quot;);
+&nbsp;        enquiry2.setEmail(&quot;marinelli.aaron@gmail.com&quot;);
+&nbsp;        enquiry2.setEnquiryType(&quot;Order Enquiry&quot;);
+&nbsp;        enquiryController.createEnquiry(enquiry2);
+&nbsp;        
+&nbsp;        EnquiryObj enquiryObj3 = new EnquiryObj();
+&nbsp;        enquiryObj3.setName(&quot;Aaron&quot;);
+&nbsp;        enquiryObj3.setDescription(&quot;Hi: I would like to please return my order, the HD camera is not focusing when in flight, thank you&quot;);
+&nbsp;        enquiryObj3.setEmail(&quot;marinelli.aaron@gmail.com&quot;);
+&nbsp;        enquiryObj3.setEnquiryType(&quot;Return Enquiry&quot;);
+&nbsp;        enquiryController.createEnquiry(enquiryObj3);
+&nbsp;
+&nbsp;        // Products Dummy Data
+&nbsp;
+&nbsp;        Long longStock = Long.valueOf(111);
+&nbsp;        float retailFloat = 120;
+&nbsp;        Product p1 = new Product(&quot;234454000&quot;, &quot;battery&quot;, retailFloat, &quot;battery&quot;, &quot;18600 mah battery&quot;, longStock+=100, longStock+=123, longStock, true, &quot;notesTest&quot;, &quot;notesTest&quot;, &quot;droneOrange.jpg&quot;, 0);
+&nbsp;        Product p2 = new Product(&quot;234234001&quot;, &quot;drone-body black&quot;, retailFloat+=1, &quot;body&quot;, &quot;standard black drone body&quot;, longStock+12, longStock+=120, longStock+=10, true, &quot;notesTest&quot;, &quot;notesTest&quot;, &quot;droneOrange.jpg&quot;, 0);
+&nbsp;        Product p3 = new Product(&quot;323454002&quot;, &quot;propeller 13mm hex&quot;, retailFloat+=2, &quot;propeller&quot;, &quot;propeller fits 13mm hex&quot;, longStock+=9, longStock+=45, longStock+=98, true, &quot;notesTest&quot;, &quot;notesTest&quot;, &quot;droneOrange.jpg&quot;, 0);
+&nbsp;        Product p4 = new Product(&quot;576874003&quot;, &quot;fast charging adapter&quot;, retailFloat+=3, &quot;charger&quot;, &quot;fast chargie 2.0 professional&quot;, longStock+=4, longStock+=5, longStock+=2, true, &quot;notesTest&quot;, &quot;notesTest&quot;, &quot;droneOrange.jpg&quot;, 0);
+&nbsp;        Product p5 = new Product(&quot;374854004&quot;, &quot;motor pack standard 4 pack&quot;, retailFloat+=4, &quot;motor&quot;, &quot;4 pack mototr 16000 rpm&quot;, longStock+=94, longStock+=34, longStock+=8, true, &quot;notesTest&quot;, &quot;notesTest&quot;, &quot;droneOrange.jpg&quot;, 0);
+&nbsp;        Product p6 = new Product(&quot;374854005&quot;, &quot;collection flexdrone special matte black&quot;, retailFloat+=4, &quot;collection&quot;, &quot;Flexdrone flying kit matte black&quot;, longStock+=1, longStock+=20, longStock+=12, true, &quot;notesTest&quot;, &quot;notesTest&quot;, &quot;droneOrange.jpg&quot;, 0);
+&nbsp;        
+&nbsp;        productRepository.save(p1);
+&nbsp;        productRepository.save(p2);
+&nbsp;        productRepository.save(p3);
+&nbsp;        productRepository.save(p4);
+&nbsp;        productRepository.save(p5);
+&nbsp;        productRepository.save(p6);
+&nbsp;
+&nbsp;         //Supplier Dummy Data
+&nbsp; 
+&nbsp;        Supplier s1 = new Supplier(&quot;AU Supplier&quot;, &quot;AU&quot;, &quot;au@email.com&quot;,&quot;234234234&quot;);
+&nbsp;        Supplier s2 = new Supplier(&quot;NZ Supplier&quot;, &quot;NZ&quot;, &quot;nz@email.com&quot;,&quot;4654755747&quot;);
+&nbsp;        supplierRepository.save(s1);
+&nbsp;        supplierRepository.save(s2);
+&nbsp;
+&nbsp;        // Product Supplier Dummy Data
+&nbsp;       
+&nbsp;        ProductSupplier ps1 = new ProductSupplier(s1,Long.valueOf(234));
+&nbsp;       	ProductSupplier ps2 = new ProductSupplier(s2,Long.valueOf(345));
+&nbsp;
+&nbsp;       	productSupplierRepository.save(ps1);
+&nbsp;       	productSupplierRepository.save(ps2);
+&nbsp;
+&nbsp;         	*/
+&nbsp;
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-17 13:32</div>
+</div>
+</body>
+</html>

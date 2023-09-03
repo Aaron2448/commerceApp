@@ -1,0 +1,151 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > SupplierController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fdmgroup.flexdronepodq42022.Controller</a>
+</div>
+
+<h1>Coverage Summary for Class: SupplierController (com.fdmgroup.flexdronepodq42022.Controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SupplierController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (12/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fdmgroup.flexdronepodq42022.Controller;
+&nbsp;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Model.Supplier;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Repository.SupplierRepository;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@CrossOrigin(origins = &quot;*&quot;, maxAge = 3600)
+&nbsp;@RestController
+&nbsp;@RequestMapping(&quot;/api/v1/suppliers&quot;)
+&nbsp;public class SupplierController {
+&nbsp;    private final SupplierRepository supplierRepository;
+&nbsp;
+&nbsp;    @Autowired
+<b class="fc">&nbsp;    public SupplierController(SupplierRepository supplierRepository) {</b>
+<b class="fc">&nbsp;        this.supplierRepository = supplierRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/getAll&quot;)
+&nbsp;    public List&lt;Supplier&gt; getAllSuppliers() {
+<b class="fc">&nbsp;        return supplierRepository.findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @PostMapping(&quot;/create&quot;)
+&nbsp;    public Supplier createSupplier(@RequestBody Supplier supplier) {
+<b class="fc">&nbsp;        return supplierRepository.save(supplier);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @PutMapping(&quot;/update/{id}&quot;)
+&nbsp;    public Supplier updateSupplier(@PathVariable Long id, @RequestBody Supplier supplier) {
+<b class="fc">&nbsp;        Supplier existingSupplier = supplierRepository.findById(id).orElse(null);</b>
+<b class="fc">&nbsp;        if (existingSupplier == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        existingSupplier.setName(supplier.getName());</b>
+<b class="fc">&nbsp;        existingSupplier.setLocation(supplier.getLocation());</b>
+<b class="fc">&nbsp;        existingSupplier.setEmail(supplier.getEmail());</b>
+<b class="fc">&nbsp;        existingSupplier.setPhone(supplier.getPhone());</b>
+<b class="fc">&nbsp;        return supplierRepository.save(existingSupplier);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @DeleteMapping(&quot;/delete/{id}&quot;)
+&nbsp;    public void deleteSupplier(@PathVariable Long id) {
+<b class="fc">&nbsp;        supplierRepository.deleteById(id);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-17 13:32</div>
+</div>
+</body>
+</html>

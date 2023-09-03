@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AdminController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.fdmgroup.flexdronepodq42022.Controller</a>
+</div>
+
+<h1>Coverage Summary for Class: AdminController (com.fdmgroup.flexdronepodq42022.Controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AdminController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.8%
+  </span>
+  <span class="absValue">
+    (18/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.fdmgroup.flexdronepodq42022.Controller;
+&nbsp;
+&nbsp;import com.fdmgroup.flexdronepodq42022.DTO.UpdateDto;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Exception.EcommerceAPIException;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Exception.ResourceNotFoundException;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Model.Role;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Model.User;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Repository.UserRepository;
+&nbsp;import com.fdmgroup.flexdronepodq42022.Service.AuthService;
+&nbsp;import lombok.extern.slf4j.Slf4j;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.security.access.prepost.PreAuthorize;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;@CrossOrigin(origins = &quot;*&quot;, maxAge = 3600)
+<b class="fc">&nbsp;@Slf4j</b>
+&nbsp;@RestController
+&nbsp;@RequestMapping(&quot;/api/v1/admin/user&quot;)
+&nbsp;public class AdminController {
+&nbsp;    private final AuthService authService;
+&nbsp;    private final UserRepository userRepository;
+&nbsp;
+&nbsp;    @Autowired
+<b class="fc">&nbsp;    public AdminController(AuthService authService, UserRepository userRepository) {</b>
+<b class="fc">&nbsp;        this.authService = authService;</b>
+<b class="fc">&nbsp;        this.userRepository = userRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return all users for admin
+&nbsp;     *
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    @PreAuthorize(&quot;hasRole(&#39;ROLE_ADMIN&#39;)&quot;)
+&nbsp;    @GetMapping(&quot;/users&quot;)
+&nbsp;    public ResponseEntity&lt;List&lt;User&gt;&gt; getAllUsers() {
+<b class="fc">&nbsp;        List&lt;User&gt; users = userRepository.findAll();</b>
+<b class="fc">&nbsp;        log.info(&quot;Found &quot; + users.size() + &quot; users&quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        return ResponseEntity.ok(users);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns users by given id, ADMIN ONLY!
+&nbsp;     *
+&nbsp;     * @param id
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    @PreAuthorize(&quot;hasRole(&#39;ROLE_ADMIN&#39;)&quot;)
+&nbsp;    @GetMapping(&quot;/{id}&quot;)
+&nbsp;    public ResponseEntity&lt;User&gt; getUserById(@PathVariable Long id) {
+<b class="fc">&nbsp;        User user = userRepository.findById(id).orElseThrow(() -&gt; new ResourceNotFoundException(&quot;User not found with id &quot; + id));</b>
+<b class="fc">&nbsp;        log.info(&quot;User found: &quot; + user);</b>
+&nbsp;
+<b class="fc">&nbsp;        return new ResponseEntity&lt;&gt;(user, HttpStatus.OK);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Update User by given id
+&nbsp;     *
+&nbsp;     * @param id
+&nbsp;     * @param updateUserDto
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    @PreAuthorize(&quot;hasRole(&#39;ROLE_ADMIN&#39;)&quot;)
+&nbsp;    @PutMapping(&quot;/update/{id}&quot;)
+&nbsp;    public ResponseEntity&lt;String&gt; updateUserById(@PathVariable Long id, @RequestBody UpdateDto updateUserDto) {
+&nbsp;        try {
+<b class="fc">&nbsp;            String message = authService.updateUserById(id, updateUserDto);</b>
+<b class="fc">&nbsp;            log.info(&quot;User updated: &quot; + message);</b>
+<b class="fc">&nbsp;            return ResponseEntity.ok(message);</b>
+<b class="fc">&nbsp;        } catch (EcommerceAPIException e) {</b>
+<b class="fc">&nbsp;            return ResponseEntity.status(e.getStatus()).body(null);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Delete User by given id
+&nbsp;     *
+&nbsp;     * @param id
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    @PreAuthorize(&quot;hasRole(&#39;ROLE_ADMIN&#39;)&quot;)
+&nbsp;    @DeleteMapping(&quot;/delete/{id}&quot;)
+&nbsp;    public ResponseEntity&lt;String&gt; deleteUser(@PathVariable Long id) {
+<b class="fc">&nbsp;        User user = userRepository.findById(id).orElseThrow(() -&gt; new ResourceNotFoundException(&quot;User not found with id &quot; + id));</b>
+<b class="fc">&nbsp;        Set&lt;Role&gt; userRole = user.getRoles();</b>
+&nbsp;
+<b class="fc">&nbsp;        if (userRole.stream().anyMatch(role -&gt; role.getName().equals(&quot;ROLE_ADMIN&quot;))) {</b>
+<b class="nc">&nbsp;            return ResponseEntity.badRequest().body(&quot;Admin user cannot be deleted.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        log.info(&quot;User deleted: &quot; + user);</b>
+<b class="nc">&nbsp;        userRepository.delete(user);</b>
+&nbsp;
+<b class="nc">&nbsp;        return ResponseEntity.ok().build();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-17 13:32</div>
+</div>
+</body>
+</html>
